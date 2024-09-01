@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 public class HomeFragment extends Fragment {
@@ -24,5 +27,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Spinner date_sel = (Spinner) getView().findViewById(R.id.date_selected);
+        String[] date_arr = {"a", "b", "c"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, date_arr);
+        date_sel.setAdapter(adapter);
     }
 }
