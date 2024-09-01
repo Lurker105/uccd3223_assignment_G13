@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A000000"
+    android:paddingLeft="10pt"
+    android:paddingTop="10pt"
+    android:paddingRight="10pt"
+    android:paddingBottom="10pt"
+    tools:context=".appearance">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:orientation="horizontal">
+             <Button
+                 android:id="@+id/back_setting"
+                 style="@style/Widget.AppCompat.Button.Borderless"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:visibility="visible"
+                 app:icon="@drawable/baseline_arrow_back_24"
+                 app:iconSize="40dp"
+                 app:iconTint="#000000" />
+
+             <TextView
+                 android:id="@+id/title"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:gravity="center"
+                 android:text="@string/appearance"
+                 android:textSize="@dimen/sizeTitle" />
+
+             <TextView
+                 android:id="@+id/space"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="5"
+                 tools:visibility="visible" />
+         </LinearLayout>
+
+
+        <RadioGroup
+            android:id="@+id/size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Large"
+                android:textSize="@dimen/size1" />
+
+            <RadioButton
+                android:id="@+id/medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medium"
+                android:textSize="@dimen/size1" />
+
+            <RadioButton
+                android:id="@+id/small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Small"
+                android:textSize="@dimen/size1" />
+        </RadioGroup>
+        <Button
+            android:id="@+id/apply"
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Apply"
+            android:textSize="@dimen/size1" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

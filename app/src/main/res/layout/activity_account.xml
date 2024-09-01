@@ -39,7 +39,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/account"
-                android:textSize="34sp" />
+                android:textSize="@dimen/sizeTitle" />
 
             <TextView
                 android:id="@+id/space"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/name"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/size1" />
 
                 <Button
                     android:id="@+id/dob"
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/dob"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/size1" />
 
                 <Button
                     android:id="@+id/phone"
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/phone"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/size1" />
 
                 <Button
                     android:id="@+id/budget"
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/budget"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/size1" />
             </LinearLayout>
         </ScrollView>
 

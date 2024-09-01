@@ -9,7 +9,7 @@
     <string name="about">About Us</string>
     <string name="logout">Logout</string>
     <string name="name">Name: </string>
-    <string name="dob">Date of Birth</string>
-    <string name="phone">Phone number</string>
-    <string name="budget">Budget</string>
+    <string name="dob">Date of Birth: </string>
+    <string name="phone">Phone number: </string>
+    <string name="budget">Budget: </string>
 </resources>

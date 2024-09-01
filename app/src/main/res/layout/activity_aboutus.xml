@@ -22,8 +22,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/about"
-            android:textSize="34sp" />
-
+            android:textSize="@dimen/sizeTitle" />
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1pt"
+            android:background="#000000" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,45 +37,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Group Number: 13"
-                android:textSize="24sp" />
+                android:textSize="@dimen/size1" />
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Group name: group name"
-                android:textSize="24sp" />
+                android:textSize="@dimen/size1" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Group member:"
-                android:textSize="24sp" />
+                android:textSize="@dimen/size1" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ng Yeong Ming"
-                android:textSize="24sp" />
+                android:textSize="@dimen/size1" />
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tio Heng Yu"
-                android:textSize="24sp" />
+                android:textSize="@dimen/size1" />
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ng Yeong Jiann"
-                android:textSize="24sp" />
+                android:textSize="@dimen/size1" />
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ernest Phoon Ken Xin"
-                android:textSize="24sp" />
+                android:textSize="@dimen/size1" />
         </LinearLayout>
 
     </LinearLayout>

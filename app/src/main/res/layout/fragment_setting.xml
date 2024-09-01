@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Settings"
-                android:textSize="34sp" />
+                android:textSize="@dimen/sizeTitle" />
 
         </LinearLayout>
 
@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/account"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/size1"
                     app:icon="@drawable/baseline_account_circle_24" />
 
                 <Button
@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/notification"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/size1"
                     app:icon="@drawable/baseline_add_alert_24" />
 
                 <Button
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/appearance"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/size1"
                     app:icon="@android:drawable/ic_menu_view" />
 
                 <Button
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/security"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/size1"
                     app:icon="@android:drawable/ic_lock_idle_lock" />
 
                 <Button
@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/about"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/size1"
                     app:icon="@drawable/baseline_info_outline_24" />
 
                 <Button
@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/logout"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/size1"
                     app:icon="@drawable/baseline_logout_24" />
             </LinearLayout>
         </ScrollView>

@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,22 @@ public class account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        // set size
+        SharedPreferences pref = getSharedPreferences("appearance",MODE_PRIVATE);
+        SharedPreferences.Editor prefEd = pref.edit();
+
+        TextView tv = (TextView) findViewById(R.id.title);
+        Button bt_name = (Button) findViewById(R.id.name);
+        Button bt_dob = (Button) findViewById(R.id.dob);
+        Button bt_phone = (Button) findViewById(R.id.phone);
+        Button bt_budget = (Button) findViewById(R.id.budget);
+
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12)+12);
+        bt_name.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
+        bt_dob.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
+        bt_phone.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
+        bt_budget.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
+
         // back to setting
         Button bt_back = (Button) findViewById(R.id.back_setting);
         bt_back.setOnClickListener(new View.OnClickListener() {
@@ -32,10 +50,9 @@ public class account extends AppCompatActivity {
         });
 
         // account data save in shared proferences
-        SharedPreferences pref = getSharedPreferences("account",MODE_PRIVATE);
+        pref = getSharedPreferences("account",MODE_PRIVATE);
 
         // Name change
-        Button bt_name = (Button) findViewById(R.id.name);
         bt_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +62,6 @@ public class account extends AppCompatActivity {
         });
 
         // Date of birth change
-        Button bt_dob = (Button) findViewById(R.id.dob);
         bt_dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +71,6 @@ public class account extends AppCompatActivity {
         });
 
         // Phone number change
-        Button bt_phone = (Button) findViewById(R.id.phone);
         bt_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +80,6 @@ public class account extends AppCompatActivity {
         });
 
         // Budget change
-        Button bt_budget = (Button) findViewById(R.id.budget);
         bt_budget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
