@@ -34,6 +34,15 @@ public class SettingFragment extends Fragment {
                 startActivity(in_acc);
             }
         });
+
+        Button bt_about = (Button) getView().findViewById(R.id.about);
+        bt_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in_about = new Intent(getActivity().getApplication(), aboutus.class);
+                startActivity(in_about);
+            }
+        });
     }
 
 }

@@ -6,9 +6,10 @@
     <string name="notification">Notifications</string>
     <string name="appearance">Appearance</string>
     <string name="security">Privacy &amp; Security</string>
-    <string name="about">About</string>
+    <string name="about">About Us</string>
     <string name="logout">Logout</string>
     <string name="name">Name: </string>
     <string name="dob">Date of Birth</string>
     <string name="phone">Phone number</string>
+    <string name="budget">Budget</string>
 </resources>
