@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,9 +9,8 @@
     android:paddingTop="10pt"
     android:paddingRight="10pt"
     android:paddingBottom="10pt"
-    tools:context=".SettingFragment">
+    tools:context=".account">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,14 +22,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/back_setting"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="visible"
+                app:icon="@drawable/baseline_arrow_back_24"
+                app:iconSize="40dp"
+                app:iconTint="#000000" />
+
             <TextView
                 android:id="@+id/title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Settings"
+                android:text="@string/account"
                 android:textSize="34sp" />
 
+            <TextView
+                android:id="@+id/space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                tools:visibility="visible" />
         </LinearLayout>
 
         <TextView
@@ -41,7 +57,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,61 +69,33 @@
                 android:paddingBottom="10pt">
 
                 <Button
-                    android:id="@+id/account"
+                    android:id="@+id/name"
                     style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/account"
-                    android:textSize="24sp"
-                    app:icon="@drawable/baseline_account_circle_24" />
+                    android:gravity="center_vertical"
+                    android:text="@string/name"
+                    android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/notification"
+                    android:id="@+id/dob"
                     style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/notification"
-                    android:textSize="24sp"
-                    app:icon="@drawable/baseline_add_alert_24" />
+                    android:gravity="center_vertical"
+                    android:text="@string/dob"
+                    android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/appearance"
+                    android:id="@+id/phone"
                     style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/appearance"
-                    android:textSize="24sp"
-                    app:icon="@android:drawable/ic_menu_view" />
-
-                <Button
-                    android:id="@+id/security"
-                    style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/security"
-                    android:textSize="24sp"
-                    app:icon="@android:drawable/ic_lock_idle_lock" />
-
-                <Button
-                    android:id="@+id/about"
-                    style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about"
-                    android:textSize="24sp"
-                    app:icon="@drawable/baseline_info_outline_24" />
-
-                <Button
-                    android:id="@+id/logout"
-                    style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/logout"
-                    android:textSize="24sp"
-                    app:icon="@drawable/baseline_logout_24" />
+                    android:gravity="center_vertical"
+                    android:text="@string/phone"
+                    android:textSize="16sp" />
             </LinearLayout>
         </ScrollView>
 
     </LinearLayout>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

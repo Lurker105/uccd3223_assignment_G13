@@ -2,4 +2,13 @@
     <string name="app_name">uccd3223_assignment_G13</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="account">Account</string>
+    <string name="notification">Notifications</string>
+    <string name="appearance">Appearance</string>
+    <string name="security">Privacy &amp; Security</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+    <string name="name">Name: </string>
+    <string name="dob">Date of Birth</string>
+    <string name="phone">Phone number</string>
 </resources>
