@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,12 +29,24 @@ public class account extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("appearance",MODE_PRIVATE);
         SharedPreferences.Editor prefEd = pref.edit();
 
+        LinearLayout ll = (LinearLayout) findViewById(R.id.bgAcc);
         TextView tv = (TextView) findViewById(R.id.title);
         Button bt_name = (Button) findViewById(R.id.name);
         Button bt_dob = (Button) findViewById(R.id.dob);
         Button bt_phone = (Button) findViewById(R.id.phone);
         Button bt_budget = (Button) findViewById(R.id.budget);
 
+        switch (pref.getString("color","white")){
+            case "white":
+                ll.setBackgroundColor(getResources().getColor(R.color.white));
+                break;
+            case "blue":
+                ll.setBackgroundColor(getResources().getColor(R.color.blue));
+                break;
+            case "green":
+                ll.setBackgroundColor(getResources().getColor(R.color.green));
+                break;
+        }
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12)+12);
         bt_name.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
         bt_dob.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));

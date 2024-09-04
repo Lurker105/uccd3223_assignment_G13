@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SettingFragment extends Fragment {
@@ -34,16 +35,26 @@ public class SettingFragment extends Fragment {
         SharedPreferences pref = getActivity().getSharedPreferences("appearance",0);
         SharedPreferences.Editor prefEd = pref.edit();
 
+        LinearLayout ll = (LinearLayout) getView().findViewById(R.id.bgSet);
         TextView tv = (TextView) getView().findViewById(R.id.title);
         Button bt_acc = (Button) getView().findViewById(R.id.account);
-        Button bt_noti = (Button) getView().findViewById(R.id.notification);
         Button bt_appe = (Button) getView().findViewById(R.id.appearance);
         Button bt_priv = (Button) getView().findViewById(R.id.security);
         Button bt_about = (Button) getView().findViewById(R.id.about);
 
+        switch (pref.getString("color","white")){
+            case "white":
+                ll.setBackgroundColor(getResources().getColor(R.color.white));
+                break;
+            case "blue":
+                ll.setBackgroundColor(getResources().getColor(R.color.blue));
+                break;
+            case "green":
+                ll.setBackgroundColor(getResources().getColor(R.color.green));
+                break;
+        }
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12)+12);
         bt_acc.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
-        bt_noti.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
         bt_appe.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
         bt_priv.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
         bt_about.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
@@ -57,7 +68,6 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        // notification
         // appearance
         bt_appe.setOnClickListener(new View.OnClickListener() {
             @Override
