@@ -11,6 +11,7 @@
     android:paddingBottom="10pt"
     tools:context=".appearance">
     <LinearLayout
+        android:id="@+id/bgApp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
@@ -45,43 +46,106 @@
                  android:layout_weight="5"
                  tools:visibility="visible" />
          </LinearLayout>
-
-
-        <RadioGroup
-            android:id="@+id/size"
+        <TextView
+            android:id="@+id/line"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="1pt"
+            android:background="#000000" />
 
-            <RadioButton
-                android:id="@+id/large"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Large"
-                android:textSize="@dimen/size1" />
-
-            <RadioButton
-                android:id="@+id/medium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Medium"
-                android:textSize="@dimen/size1" />
-
-            <RadioButton
-                android:id="@+id/small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Small"
-                android:textSize="@dimen/size1" />
-        </RadioGroup>
-        <Button
-            android:id="@+id/apply"
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Apply"
-            android:textSize="@dimen/size1" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10pt"
+            android:paddingTop="10pt"
+            android:paddingRight="10pt"
+            android:paddingBottom="10pt">
 
+            <TextView
+                android:id="@+id/sizeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/size"
+                android:textSize="@dimen/size1" />
+
+            <RadioGroup
+                android:id="@+id/size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Large"
+                    android:textSize="@dimen/size1" />
+
+                <RadioButton
+                    android:id="@+id/medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Medium"
+                    android:textSize="@dimen/size1" />
+
+                <RadioButton
+                    android:id="@+id/small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Small"
+                    android:textSize="@dimen/size1" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1pt"
+                android:background="#000000" />
+
+            <TextView
+                android:id="@+id/colorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/color"
+                android:textSize="@dimen/size1" />
+
+            <RadioGroup
+                android:id="@+id/color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="White"
+                    android:textSize="@dimen/size1" />
+
+                <RadioButton
+                    android:id="@+id/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blue"
+                    android:textSize="@dimen/size1" />
+
+                <RadioButton
+                    android:id="@+id/green"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Green"
+                    android:textSize="@dimen/size1" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/apply"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Apply"
+                android:textSize="@dimen/size1" />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
