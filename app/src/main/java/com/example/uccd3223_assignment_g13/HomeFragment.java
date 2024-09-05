@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
         PieChart pieChart = (PieChart) getView().findViewById(R.id.piechart);
         pieChart.addPieSlice(new PieModel("R", 50, Color.parseColor("#FFA726")));
         pieChart.addPieSlice(new PieModel("CC", 30, Color.parseColor("#111111")));
-        pieChart.startAnimation();
+        //pieChart.startAnimation();
     }
 
 }
