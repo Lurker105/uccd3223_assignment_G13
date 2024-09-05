@@ -24,6 +24,7 @@ public class TransactionFragment extends Fragment {
     }
 
     //hahahah
+    //hehe
     
     @Override
     public void onStart() {
