@@ -23,6 +23,8 @@ public class TransactionFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_transaction, container, false);
     }
 
+    //hahahah
+    
     @Override
     public void onStart() {
         super.onStart();
