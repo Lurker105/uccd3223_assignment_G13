@@ -38,52 +38,6 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Date of Birth Inputs (Day, Month, Year) -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dobDayInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Day (DD)"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dobMonthInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Month (MM)"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dobYearInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Year (YYYY)"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Phone Number Input -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneNumberInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number (XXX-XXXXXXX)"
-            android:inputType="phone" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <!-- Register Button -->
     <Button
         android:id="@+id/registerButton"

@@ -3,14 +3,12 @@ package com.example.uccd3223_assignment_g13;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,16 +20,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameInput, passwordInput;
     private Button loginButton, registerButton, deleteAccountButton;
-    private CheckBox rememberMeCheckBox;
     private UserLoginInfo userLoginInfo;
     private boolean passwordVisible = false;
-    private SharedPreferences sharedPreferences;
-
-    // SharedPreferences keys
-    private static final String PREFS_NAME = "LoginPrefs";
-    private static final String PREF_USERNAME = "username";
-    private static final String PREF_PASSWORD = "password";
-    private static final String PREF_REMEMBER_ME = "remember_me";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +34,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
         deleteAccountButton = findViewById(R.id.deleteAccountButton);
-        rememberMeCheckBox = findViewById(R.id.rememberMeCheckBox);
 
         userLoginInfo = new UserLoginInfo(this);
-        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-
-        // Load saved credentials if "Remember Me" was checked
-        loadSavedCredentials();
-
 
         // Set initial icon for password visibility off
-        setIconSize(passwordInput, R.drawable.ic_visibility_off, 40, 30);
+        setIconSize(passwordInput, R.drawable.ic_visibility_off, 30, 30);
 
         // Toggle password visibility on touch
         passwordInput.setOnTouchListener(new View.OnTouchListener() {
@@ -65,11 +49,11 @@ public class LoginActivity extends AppCompatActivity {
                         // Toggle password visibility
                         if (passwordVisible) {
                             passwordInput.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance());
-                            setIconSize(passwordInput, R.drawable.ic_visibility_off, 40, 30); // Set visibility off icon
+                            setIconSize(passwordInput, R.drawable.ic_visibility_off, 30, 30); // Set visibility off icon
                             passwordVisible = false;
                         } else {
                             passwordInput.setTransformationMethod(android.text.method.HideReturnsTransformationMethod.getInstance());
-                            setIconSize(passwordInput, R.drawable.ic_visibility, 40, 30); // Set visibility on icon
+                            setIconSize(passwordInput, R.drawable.ic_visibility, 30, 30); // Set visibility on icon
                             passwordVisible = true;
                         }
                         return true;
@@ -78,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         // Handle login button click
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,34 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // Load saved credentials from SharedPreferences
-    private void loadSavedCredentials() {
-        if (sharedPreferences.getBoolean(PREF_REMEMBER_ME, false)) {
-            String savedUsername = sharedPreferences.getString(PREF_USERNAME, "");
-            String savedPassword = sharedPreferences.getString(PREF_PASSWORD, "");
-
-            usernameInput.setText(savedUsername);
-            passwordInput.setText(savedPassword);
-            rememberMeCheckBox.setChecked(true); // Remember Me was checked
-        }
-    }
-
-    // Save user credentials when "Remember Me" is checked
-    private void saveCredentials(String username, String password) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(PREF_USERNAME, username);
-        editor.putString(PREF_PASSWORD, password);
-        editor.putBoolean(PREF_REMEMBER_ME, rememberMeCheckBox.isChecked());
-        editor.apply(); // Save the changes
-    }
-
-    // Clear saved credentials when "Remember Me" is unchecked
-    private void clearCredentials() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply(); // Clear the saved credentials
-    }
-
+    // Handle the login process
     private void loginUser() {
         String username = usernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
@@ -138,12 +96,8 @@ public class LoginActivity extends AppCompatActivity {
         if (validateInput(username, password)) {
             if (userLoginInfo.checkLogin(username, password)) {
                 Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                // Save credentials if "Remember Me" is checked
-                if (rememberMeCheckBox.isChecked()) {
-                    saveCredentials(username, password);
-                } else {
-                    clearCredentials(); // Clear credentials if "Remember Me" is not checked
-                }
+
+                // Proceed to the main activity after login
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             } else {
@@ -197,6 +151,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // Validate input fields (username and password)
     private boolean validateInput(String username, String password) {
         if (TextUtils.isEmpty(username)) {
             usernameInput.setError("Username cannot be empty");
@@ -216,6 +171,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    // Set the size of the icon for password visibility
     private void setIconSize(EditText editText, int drawableRes, int width, int height) {
         Drawable drawable = ContextCompat.getDrawable(this, drawableRes);
         if (drawable != null) {
@@ -224,4 +181,3 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 }
-
