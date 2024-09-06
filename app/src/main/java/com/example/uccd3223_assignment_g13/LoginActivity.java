@@ -1,7 +1,9 @@
 package com.example.uccd3223_assignment_g13;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,7 +24,14 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton, registerButton, deleteAccountButton;
     private CheckBox rememberMeCheckBox;
     private UserLoginInfo userLoginInfo;
-    private boolean passwordVisible = false; // Track password visibility
+    private boolean passwordVisible = false;
+    private SharedPreferences sharedPreferences;
+
+    // SharedPreferences keys
+    private static final String PREFS_NAME = "LoginPrefs";
+    private static final String PREF_USERNAME = "username";
+    private static final String PREF_PASSWORD = "password";
+    private static final String PREF_REMEMBER_ME = "remember_me";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,11 @@ public class LoginActivity extends AppCompatActivity {
         rememberMeCheckBox = findViewById(R.id.rememberMeCheckBox);
 
         userLoginInfo = new UserLoginInfo(this);
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        // Load saved credentials if "Remember Me" was checked
+        loadSavedCredentials();
+
 
         // Set initial icon for password visibility off
         setIconSize(passwordInput, R.drawable.ic_visibility_off, 40, 30);
@@ -64,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         // Handle login button click
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +101,55 @@ public class LoginActivity extends AppCompatActivity {
                 confirmDeleteAccount(); // Ask for confirmation before deletion
             }
         });
+    }
+
+    // Load saved credentials from SharedPreferences
+    private void loadSavedCredentials() {
+        if (sharedPreferences.getBoolean(PREF_REMEMBER_ME, false)) {
+            String savedUsername = sharedPreferences.getString(PREF_USERNAME, "");
+            String savedPassword = sharedPreferences.getString(PREF_PASSWORD, "");
+
+            usernameInput.setText(savedUsername);
+            passwordInput.setText(savedPassword);
+            rememberMeCheckBox.setChecked(true); // Remember Me was checked
+        }
+    }
+
+    // Save user credentials when "Remember Me" is checked
+    private void saveCredentials(String username, String password) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PREF_USERNAME, username);
+        editor.putString(PREF_PASSWORD, password);
+        editor.putBoolean(PREF_REMEMBER_ME, rememberMeCheckBox.isChecked());
+        editor.apply(); // Save the changes
+    }
+
+    // Clear saved credentials when "Remember Me" is unchecked
+    private void clearCredentials() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply(); // Clear the saved credentials
+    }
+
+    private void loginUser() {
+        String username = usernameInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
+
+        if (validateInput(username, password)) {
+            if (userLoginInfo.checkLogin(username, password)) {
+                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                // Save credentials if "Remember Me" is checked
+                if (rememberMeCheckBox.isChecked()) {
+                    saveCredentials(username, password);
+                } else {
+                    clearCredentials(); // Clear credentials if "Remember Me" is not checked
+                }
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            } else {
+                Toast.makeText(LoginActivity.this, "Invalid login. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     // Confirm if the user wants to delete their account
@@ -135,21 +197,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void loginUser() {
-        String username = usernameInput.getText().toString().trim();
-        String password = passwordInput.getText().toString().trim();
-
-        if (validateInput(username, password)) {
-            if (userLoginInfo.checkLogin(username, password)) {
-                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            } else {
-                Toast.makeText(LoginActivity.this, "Invalid login. Please try again.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
     private boolean validateInput(String username, String password) {
         if (TextUtils.isEmpty(username)) {
             usernameInput.setError("Username cannot be empty");
@@ -169,8 +216,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
-
-    // Utility method to resize and set icons to 40dp
     private void setIconSize(EditText editText, int drawableRes, int width, int height) {
         Drawable drawable = ContextCompat.getDrawable(this, drawableRes);
         if (drawable != null) {
@@ -179,3 +224,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 }
+
