@@ -8,28 +8,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class UserLoginInfo extends SQLiteOpenHelper {
 
-    // Database Name and Version
-    private static final String DATABASE_NAME = "UserLoginInfo.db";
-    private static final int DATABASE_VERSION = 1;
-
-    // Table and Columns
-    private static final String TABLE_USERS = "UserLoginInfo";
-    private static final String COLUMN_ID = "id";
+    private static final String DATABASE_NAME = "UserInfo.db";
+    private static final String TABLE_USERS = "users";
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
 
     public UserLoginInfo(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create UserLoginInfo table
-        String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
-                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COLUMN_USERNAME + " TEXT,"
-                + COLUMN_PASSWORD + " TEXT" + ")";
-        db.execSQL(CREATE_USERS_TABLE);
+        db.execSQL("CREATE TABLE " + TABLE_USERS + "(" +
+                COLUMN_USERNAME + " TEXT PRIMARY KEY," +
+                COLUMN_PASSWORD + " TEXT NOT NULL)");
     }
 
     @Override
@@ -38,41 +30,49 @@ public class UserLoginInfo extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Add new user
+    // Method to register a new user
     public boolean addUser(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, username);
         values.put(COLUMN_PASSWORD, password);
 
-        // Check if username already exists
-        if (checkUserExists(username)) {
-            return false;
-        }
-
         long result = db.insert(TABLE_USERS, null, values);
+        db.close();
         return result != -1;
     }
 
-    // Check if user exists
-    public boolean checkUserExists(String username) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + "=?";
-        Cursor cursor = db.rawQuery(query, new String[]{username});
-
-        boolean exists = cursor.getCount() > 0;
-        cursor.close();
-        return exists;
-    }
-
-    // Validate login credentials
+    // Method to check if a user can log in with provided username and password
     public boolean checkLogin(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + "=? AND " + COLUMN_PASSWORD + "=?";
-        Cursor cursor = db.rawQuery(query, new String[]{username, password});
+        Cursor cursor = db.query(TABLE_USERS, null, COLUMN_USERNAME + "=? AND " + COLUMN_PASSWORD + "=?",
+                new String[]{username, password}, null, null, null);
 
-        boolean isValid = cursor.getCount() > 0;
-        cursor.close();
-        return isValid;
+        boolean result = cursor != null && cursor.getCount() > 0;
+        if (cursor != null) {
+            cursor.close();
+        }
+        db.close();
+        return result;
+    }
+
+    // Method to delete a user account if both username and password are correct
+    public boolean deleteUser(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_USERS, null, COLUMN_USERNAME + "=? AND " + COLUMN_PASSWORD + "=?",
+                new String[]{username, password}, null, null, null);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            // User found, proceed with deletion
+            int result = db.delete(TABLE_USERS, COLUMN_USERNAME + "=?", new String[]{username});
+            cursor.close();
+            db.close();
+            return result > 0;
+        } else {
+            // User not found or incorrect password
+            if (cursor != null) cursor.close();
+            db.close();
+            return false;
+        }
     }
 }

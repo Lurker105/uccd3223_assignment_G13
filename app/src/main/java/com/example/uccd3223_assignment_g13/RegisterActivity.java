@@ -14,7 +14,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText usernameInput, passwordInput;
     private Button registerButton, loginButton;
-    private UserLoginInfo userLoginInfo;  // Updated to UserLoginInfo
+    private UserLoginInfo userLoginInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         loginButton = findViewById(R.id.loginButton);
 
-        userLoginInfo = new UserLoginInfo(this);  // Initialize UserLoginInfo
+        userLoginInfo = new UserLoginInfo(this);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,15 +47,35 @@ public class RegisterActivity extends AppCompatActivity {
         String username = usernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
 
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            Toast.makeText(RegisterActivity.this, "Please enter a valid username and password", Toast.LENGTH_SHORT).show();
-        } else if (userLoginInfo.addUser(username, password)) {
-            // Successful registration
-            Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-        } else {
-            // Username already taken
-            Toast.makeText(RegisterActivity.this, "Username already exists. Please choose a different one.", Toast.LENGTH_SHORT).show();
+        if (validateInput(username, password)) {
+            if (userLoginInfo.addUser(username, password)) {
+                Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
+            } else {
+                Toast.makeText(RegisterActivity.this, "Username already exists. Please choose another one.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
+
+    private boolean validateInput(String username, String password) {
+        if (TextUtils.isEmpty(username)) {
+            usernameInput.setError("Username cannot be empty");
+            return false;
+        }
+        if (username.length() < 4) {
+            usernameInput.setError("Username must be at least 4 characters");
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            passwordInput.setError("Password cannot be empty");
+            return false;
+        }
+        if (password.length() < 6) {
+            passwordInput.setError("Password must be at least 6 characters");
+            return false;
+        }
+        return true;
+    }
+
 }

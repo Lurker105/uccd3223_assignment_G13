@@ -4,43 +4,90 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#FFFFFF"> <!-- Set background color to white -->
+    android:background="#FFFFFF">
 
-    <!-- Image at the top -->
+
     <ImageView
-        android:id="@+id/loginImage"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginBottom="150dp"
-        android:src="@drawable/logo" />
+        android:id="@+id/logoImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"
+        android:contentDescription="App Logo"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MoneyFlow"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:shadowColor="#888888"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:layout_marginBottom="20dp" />
+
 
     <!-- Username input -->
-    <EditText
-        android:id="@+id/usernameInput"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username"
-        android:inputType="text" />
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usernameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password input -->
-    <EditText
-        android:id="@+id/passwordInput"
+    <!-- Password input  -->
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:drawableEnd="@drawable/ic_visibility_off" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Remember Me -->
+    <CheckBox
+        android:id="@+id/rememberMeCheckBox"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:text="Remember Me" />
 
     <!-- Login Button -->
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:text="Login"
+        android:textColor="#FFFFFF"
+        android:background="#FFD700"
+        android:layout_marginTop="20dp" />
 
     <!-- Register Button -->
     <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:background="#FFD700"
+        android:layout_marginTop="10dp" />
+
+    <!-- Delete Account Button -->
+    <Button
+        android:id="@+id/deleteAccountButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        android:textColor="#FFFFFF"
+        android:background="#FF0000"
+        android:layout_marginTop="20dp" />
 </LinearLayout>
