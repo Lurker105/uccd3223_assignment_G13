@@ -22,9 +22,6 @@ public class TransactionFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_transaction, container, false);
     }
-
-    //hahahah
-    //hehe
     
     @Override
     public void onStart() {
