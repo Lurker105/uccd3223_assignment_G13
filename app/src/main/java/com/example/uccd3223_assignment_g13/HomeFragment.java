@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.eazegraph.lib.charts.BarChart;
 import org.eazegraph.lib.charts.PieChart;
@@ -25,7 +27,16 @@ import org.eazegraph.lib.models.ValueLineSeries;
 
 public class HomeFragment extends Fragment {
 
-    //public static String[] appendArray(int n)
+    public static String[] appendArray(String arr[], String x){
+        int n = arr.length;
+        int i;
+        String newArr[] = new String[n + 1];
+        for (i = 0; i < n; i++){
+            newArr[i] = arr[i];
+        }
+        newArr[i] = x;
+        return newArr;
+    }
     public HomeFragment(){
         // require a empty public constructor
     }
@@ -42,11 +53,17 @@ public class HomeFragment extends Fragment {
         super.onStart();
         Spinner date_sel = (Spinner) getView().findViewById(R.id.date_selected);
         String[] date_arr = {};
+
+        date_arr = appendArray(date_arr, "a");
+        date_arr = appendArray(date_arr, "a");
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, date_arr);
         date_sel.setAdapter(adapter);
 
         PieChart pieChart = (PieChart) getView().findViewById(R.id.piechart);
         pieChart.addPieSlice(new PieModel("R", 50, Color.parseColor("#FFA726")));
+
+
         pieChart.addPieSlice(new PieModel("CC", 30, Color.parseColor("#111111")));
         pieChart.startAnimation();
 
@@ -70,6 +87,19 @@ public class HomeFragment extends Fragment {
 
         mCubicValueLineChart.addSeries(series);
         mCubicValueLineChart.startAnimation();
+
+        date_sel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                pieChart.clearChart();
+                mCubicValueLineChart.clearChart();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
     }
 
 }
