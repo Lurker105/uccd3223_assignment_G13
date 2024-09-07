@@ -2,6 +2,8 @@ package com.example.uccd3223_assignment_g13;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private UserLoginInfo userLoginInfo;
     private boolean passwordVisible = false;
     private static final String TAG = "LoginActivity";
+    private static final String SHARED_PREF_NAME = "account";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,14 +135,31 @@ public class LoginActivity extends AppCompatActivity {
     private void loginUser() {
         String username = usernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
+        Cursor cursor = userLoginInfo.getUserInfo(username);
 
         if (validateInput(username, password)) {
             Log.d(TAG, "Validating login for user: " + username);
+
             if (userLoginInfo.checkLogin(username, password)) {
-                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Login successful for user: " + username);
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
+                // If login successful, retrieve dob and phone, then save to SharedPreferences
+                if (cursor.moveToFirst()) {
+                    String dob = cursor.getString(cursor.getColumnIndex(UserLoginInfo.COLUMN_DOB));
+                    String phone = cursor.getString(cursor.getColumnIndex(UserLoginInfo.COLUMN_PHONE));
+                    cursor.close();
+
+                    // Store user details in SharedPreferences
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("username", username);
+                    editor.putString("dob", dob);
+                    editor.putString("phone", phone);
+                    editor.apply();  // Commit changes
+
+                    // Navigate to MainActivity or any other page
+                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }
             } else {
                 Log.d(TAG, "Login failed for user: " + username);
                 showRegisterPrompt();

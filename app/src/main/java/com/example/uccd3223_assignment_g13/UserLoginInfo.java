@@ -14,10 +14,10 @@ public class UserLoginInfo extends SQLiteOpenHelper {
     private static final String TAG = "UserLoginInfo";
 
     // Column names
-    private static final String COLUMN_USERNAME = "username";
-    private static final String COLUMN_PASSWORD = "password";
-    private static final String COLUMN_DOB = "dob";
-    private static final String COLUMN_PHONE = "phone";
+    public static final String COLUMN_USERNAME = "username";
+    public static final String COLUMN_PASSWORD = "password";
+    public static final String COLUMN_DOB = "dob";
+    public static final String COLUMN_PHONE = "phone";
 
     public UserLoginInfo(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -115,5 +115,12 @@ public class UserLoginInfo extends SQLiteOpenHelper {
             Log.d(TAG, "Failed to delete user: " + username);
             return false;
         }
+    }
+
+    // Method to get user info (username, dob, phone)
+    public Cursor getUserInfo(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(TABLE_USERS, new String[]{COLUMN_USERNAME, COLUMN_DOB, COLUMN_PHONE},
+                COLUMN_USERNAME + "=?", new String[]{username}, null, null, null);
     }
 }
