@@ -140,21 +140,19 @@ public class LoginActivity extends AppCompatActivity {
         if (validateInput(username, password)) {
             Log.d(TAG, "Validating login for user: " + username);
 
-            if (userLoginInfo.checkLogin(username, password)) {
-                // If login successful, retrieve dob and phone, then save to SharedPreferences
-                if (cursor.moveToFirst()) {
-                    String dob = cursor.getString(cursor.getColumnIndex(UserLoginInfo.COLUMN_DOB));
-                    String phone = cursor.getString(cursor.getColumnIndex(UserLoginInfo.COLUMN_PHONE));
-                    cursor.close();
 
-                    // Store user details in SharedPreferences
-                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("username", username);
-                    editor.putString("dob", dob);
-                    editor.putString("phone", phone);
-                    editor.apply();  // Commit changes
+            // Check if cursor is valid and has data
+            if (cursor != null && cursor.moveToFirst()) {
+                // Retrieve the column indices for DOB and Phone
+                int dobIndex = cursor.getColumnIndex(UserLoginInfo.COLUMN_DOB);
+                int phoneIndex = cursor.getColumnIndex(UserLoginInfo.COLUMN_PHONE);
 
+                // Check if column indices are valid
+                if (dobIndex >= 0 && phoneIndex >= 0) {
+                    // Retrieve actual data from the cursor
+                    String dob = cursor.getString(dobIndex);
+                    String phone = cursor.getString(phoneIndex);
+                    cursor.close(); // Close the cursor
                     // Navigate to MainActivity or any other page
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
