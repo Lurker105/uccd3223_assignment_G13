@@ -1,31 +1,31 @@
-//package com.example.uccd3223_assignment_g13;
-//
-//import android.content.Intent;
-//import android.content.SharedPreferences;
-//import android.os.Bundle;
-//
-//import androidx.fragment.app.Fragment;
-//
-//import android.util.TypedValue;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.Button;
-//import android.widget.LinearLayout;
-//
-//public class TransactionFragment extends Fragment {
-//
-//
-//    public TransactionFragment() {
-//        // Required empty public constructor
-//    }
-//
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_transaction, container, false);
-//    }
+package com.example.uccd3223_assignment_g13;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+public class TransactionFragment extends Fragment {
+
+
+    public TransactionFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_transaction, container, false);
+    }
 //
 //    @Override
 //    public void onStart() {
@@ -58,6 +58,6 @@
 //                startActivity(in_addexpense);
 //            }
 //        });
-//
+
 //    }
-//}
+}
