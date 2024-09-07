@@ -2,7 +2,6 @@ package com.example.uccd3223_assignment_g13;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -13,17 +12,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class account extends AppCompatActivity {
 
+    public UserLoginInfo userLoginInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        userLoginInfo = new UserLoginInfo(this);
 
         // set size
         SharedPreferences pref = getSharedPreferences("appearance",MODE_PRIVATE);
@@ -53,6 +51,9 @@ public class account extends AppCompatActivity {
         bt_phone.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
         bt_budget.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
 
+
+
+
         // back to setting
         Button bt_back = (Button) findViewById(R.id.back_setting);
         bt_back.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +70,7 @@ public class account extends AppCompatActivity {
         bt_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeInfo("name",bt_name,"Name: ",
+                changeInfo("username",bt_name,"Name: ",
                         InputType.TYPE_TEXT_FLAG_CAP_WORDS);
             }
         });
@@ -103,7 +104,7 @@ public class account extends AppCompatActivity {
 
 
         // Default value
-        bt_name.setText("Name: " + pref.getString("name",""));
+        bt_name.setText("Name: " + pref.getString("username",""));
         bt_dob.setText("Date of Birth: " + pref.getString("dob",""));
         bt_phone.setText("Phone number: " + pref.getString("phone",""));
         bt_budget.setText("Monthly budget: RM" + pref.getString("budget",""));
@@ -117,6 +118,7 @@ public class account extends AppCompatActivity {
         EditText et = new EditText(this);
         et.setInputType(inType);
         builder.setCancelable(false);
+
         if(type == "dob"){
            builder.setTitle("Date of birth(DD/MM/YYYY)");
         }
@@ -131,6 +133,12 @@ public class account extends AppCompatActivity {
                 prefEd.putString(type,et.getText().toString());
                 prefEd.commit();
                 bt.setText(text + pref.getString(type,""));
+                String name = pref.getString("username","");
+                String password = pref.getString("password", "");
+                String dob = pref.getString("dob","");
+                String phone = pref.getString("phone","");
+                boolean b1 = userLoginInfo.deleteUser(name,password);
+                boolean b2 = userLoginInfo.addUser(name,password,dob,phone);
             }
         });
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {

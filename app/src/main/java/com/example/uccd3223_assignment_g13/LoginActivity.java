@@ -159,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("username", username);
                     editor.putString("dob", dob);
                     editor.putString("phone", phone);
+                    editor.putString("password", password);
                     editor.commit();  // Commit changes
                     // Navigate to MainActivity or any other page
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
