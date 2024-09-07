@@ -18,12 +18,9 @@ public interface ExpenseDao {
     @Insert
     void insertExpense(Expense expense);
 
-    @Delete
-    void deleteExpense(Expense expense);
 
     @Query("SELECT * FROM Expense")
     List<Expense> getAll();
-
 
 
 }

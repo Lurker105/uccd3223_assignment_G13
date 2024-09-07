@@ -35,9 +35,9 @@
         android:paddingRight="10pt"
         android:paddingBottom="10pt">
 
-         <Button
+        <Button
         android:id="@+id/addexpense"
-        android:layout_width="match_parent"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
         />
 
