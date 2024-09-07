@@ -3,6 +3,7 @@ package com.example.uccd3223_assignment_g13;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,29 +11,30 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText usernameInput, passwordInput;
+    private EditText usernameInput, passwordInput, dobInput, phoneInput;
     private Button registerButton, loginButton;
     private UserLoginInfo userLoginInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);  // Ensure this layout file is correct
+        setContentView(R.layout.activity_register);
 
-        // Initialize views
+        // Initialize UI components
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
+        dobInput = findViewById(R.id.dobInput);  // Date of Birth input field
+        phoneInput = findViewById(R.id.phoneInput); // Phone number input field
         registerButton = findViewById(R.id.registerButton);
+        loginButton = findViewById(R.id.loginButton);
 
-        // If there’s a login button, initialize it; ensure it's added in the layout
-        loginButton = findViewById(R.id.loginButton);  // If not in layout, ensure you add this
-
-        // Initialize user login info
         userLoginInfo = new UserLoginInfo(this);
 
-        // Set click listeners for register and login buttons
+        // Register button logic
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,10 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        // Login button logic
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to login activity
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
@@ -52,23 +54,23 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerUser() {
         String username = usernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
+        String dob = dobInput.getText().toString().trim();
+        String phone = phoneInput.getText().toString().trim();
 
         // Validate user input
-        if (validateInput(username, password)) {
-            // Add user and check if the username already exists
-            if (userLoginInfo.addUser(username, password)) {
-                // Show success message and navigate to login activity
+        if (validateInput(username, password, dob, phone)) {
+            if (userLoginInfo.addUser(username, password, dob, phone)) {
                 Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                finish();  // Finish this activity to prevent user from returning to it
+                finish();
             } else {
                 Toast.makeText(RegisterActivity.this, "Username already exists. Please choose another one.", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    // Method to validate the username and password input fields
-    private boolean validateInput(String username, String password) {
+    // Input validation
+    private boolean validateInput(String username, String password, String dob, String phone) {
         if (TextUtils.isEmpty(username)) {
             usernameInput.setError("Username cannot be empty");
             return false;
@@ -85,6 +87,28 @@ public class RegisterActivity extends AppCompatActivity {
             passwordInput.setError("Password must be at least 6 characters");
             return false;
         }
+        if (!validateDOB(dob)) {
+            dobInput.setError("Invalid DOB. Use format: YYYY-MM-DD");
+            return false;
+        }
+        if (!validatePhoneNumber(phone)) {
+            phoneInput.setError("Invalid phone number. Use format: XXX-XXXXXXX");
+            return false;
+        }
         return true;
+    }
+
+    // Method to validate Date of Birth in YYYY-MM-DD format
+    private boolean validateDOB(String dob) {
+        // Use regex to check for valid YYYY-MM-DD format
+        String dobPattern = "^\\d{4}-\\d{2}-\\d{2}$";
+        return Pattern.compile(dobPattern).matcher(dob).matches();
+    }
+
+    // Method to validate phone number format XXX-XXXXXXX
+    private boolean validatePhoneNumber(String phone) {
+        // Use regex to check for phone number format
+        String phonePattern = "^\\d{3}-\\d{7}$";
+        return Pattern.compile(phonePattern).matcher(phone).matches();
     }
 }

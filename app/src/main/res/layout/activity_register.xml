@@ -38,6 +38,28 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Date of Birth input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dobInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date of Birth (YYYY-MM-DD)" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Phone number input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number (XXX-XXXXXXX)" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- Register Button -->
     <Button
         android:id="@+id/registerButton"
@@ -46,12 +68,11 @@
         android:text="Register"
         android:layout_marginTop="20dp" />
 
-    <!-- Login Button (make sure this button exists in your layout) -->
+    <!-- Login Button -->
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
         android:layout_marginTop="10dp" />
-
 </LinearLayout>

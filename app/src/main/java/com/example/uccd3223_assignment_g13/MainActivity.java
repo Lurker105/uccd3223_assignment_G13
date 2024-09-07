@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TransactionFragment transactionFragment = new TransactionFragment();
+        //TransactionFragment transactionFragment = new TransactionFragment();
         HomeFragment homeFragment = new HomeFragment();
         SettingFragment settingFragment = new SettingFragment();
 
@@ -22,25 +22,25 @@ public class MainActivity extends AppCompatActivity{
         BNV.setSelectedItemId(R.id.home);
         getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, homeFragment).commit();
 
-        BNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                if (item.getItemId() == R.id.transaction){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, transactionFragment).commit();
-                }
-                else if (item.getItemId() == R.id.home) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, homeFragment).commit();
-                }
-                else if (item.getItemId() == R.id.setting) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, settingFragment).commit();
-                }
-                else{
-                    return false;
-                }
-                return true;
-            }
-        });
+        //BNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//
+//                if (item.getItemId() == R.id.transaction){
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, transactionFragment).commit();
+//                }
+//                else if (item.getItemId() == R.id.home) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, homeFragment).commit();
+//                }
+//                else if (item.getItemId() == R.id.setting) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, settingFragment).commit();
+//                }
+//                else{
+//                    return false;
+//                }
+//                return true;
+//            }
+//        });
 
 
     }
