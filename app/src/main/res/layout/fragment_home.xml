@@ -60,6 +60,7 @@
                         />
 
                     <LinearLayout
+                        android:id="@+id/piechart_bar"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -67,45 +68,6 @@
                         android:orientation="vertical"
                         android:gravity="center_vertical"
                         >
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="15dp"
-                            android:layout_gravity="center_vertical">
-
-                            <!--View to display the yellow color icon-->
-                            <View
-                                android:layout_width="15dp"
-                                android:layout_height="match_parent"
-                                android:background="@color/green"/>
-
-                            <!--Text view to display R -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="R"
-                                android:paddingLeft="10dp"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="15dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="5dp">
-
-                            <!--View to display the green color icon-->
-                            <View
-                                android:layout_width="15dp"
-                                android:layout_height="match_parent"
-                                android:background="@color/blue"/>
-
-                            <!--Text view to display python text -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Python"
-                                android:paddingLeft="10dp"/>
-
-                        </LinearLayout>
 
                     </LinearLayout>
 

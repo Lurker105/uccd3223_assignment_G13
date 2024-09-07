@@ -2,6 +2,7 @@ package com.example.uccd3223_assignment_g13;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -15,10 +16,10 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
 
     private static final String ID_COL = "id";
 
-    private static final String AMOUNT_COL = "amount";
-    private static final String CATEGORY_COL = "category";
+    public static final String AMOUNT_COL = "amount";
+    public static final String CATEGORY_COL = "category";
     private static final String DESCRIPTION_COL = "description";
-    private static final String DATE_COL = "date";
+    public static final String DATE_COL = "date";
 
 
     // creating a constructor for our database handler.
@@ -71,6 +72,28 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public Cursor getMonth_Year(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(TABLE_NAME, new String[]{DATE_COL},
+                null, null, DATE_COL, null, null,null);
+    }
 
+    public Cursor getMonthlyCost(String date){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT "+ CATEGORY_COL + ", SUM(" + AMOUNT_COL + ") AS " + AMOUNT_COL +
+                " FROM " + TABLE_NAME +
+                " WHERE "+ DATE_COL + " LIKE '%" + date +
+                "' GROUP BY " + CATEGORY_COL;
+        return db.rawQuery(query,null);
+    }
+
+    public Cursor getDairyCost(String date){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT "+ DATE_COL + ", SUM(" + AMOUNT_COL + ") AS " + AMOUNT_COL +
+                " FROM " + TABLE_NAME +
+                " WHERE "+ DATE_COL + " = '" + date +
+                "' GROUP BY " + DATE_COL;
+        return db.rawQuery(query,null);
+    }
 
 }
