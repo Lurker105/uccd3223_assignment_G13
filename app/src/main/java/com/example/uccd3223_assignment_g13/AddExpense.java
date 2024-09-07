@@ -69,15 +69,14 @@ public class AddExpense extends AppCompatActivity {
     }
     private void saveExpense() {
         String amountText = amountInput.getText().toString().trim();
+        double amount = Double.parseDouble(amountInput.getText().toString());
         String category = categoryInput.getText().toString().trim();
         String desc = descInput.getText().toString().trim();
 
-        if(TextUtils.isEmpty(amountText) || TextUtils.isEmpty(category) || TextUtils.isEmpty(selectedDate)) {
+        if(category.isEmpty() || amount <= 0 || selectedDate.isEmpty()) {
             Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        double amount = Double.parseDouble(amountText);
 
         Expense expense = new Expense(amount, category, desc, selectedDate);
 

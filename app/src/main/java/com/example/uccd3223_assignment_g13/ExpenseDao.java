@@ -15,12 +15,16 @@ public interface ExpenseDao {
     @Query("SELECT * FROM Expense")
     List<Expense> getAllExpenses();
 
+
+
     @Insert
     void insertExpense(Expense expense);
 
 
     @Query("SELECT * FROM Expense")
     List<Expense> getAll();
+
+
 
 
 }

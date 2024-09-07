@@ -9,8 +9,7 @@ import androidx.room.RoomDatabase;
 public abstract class ExpenseDatabase extends  RoomDatabase{
 
 
-    private static ExpenseDatabase instance;
-    
+
     // Define a method to access the DAO
     public abstract ExpenseDao expenseDao();
 
