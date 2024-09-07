@@ -1,11 +1,10 @@
 package com.example.uccd3223_assignment_g13;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 public class SettingFragment extends Fragment {
 
@@ -41,6 +42,7 @@ public class SettingFragment extends Fragment {
         Button bt_appe = (Button) getView().findViewById(R.id.appearance);
         Button bt_priv = (Button) getView().findViewById(R.id.security);
         Button bt_about = (Button) getView().findViewById(R.id.about);
+        Button bt_logout = (Button) getView().findViewById(R.id.logout);
 
         switch (pref.getString("color","white")){
             case "white":
@@ -58,6 +60,7 @@ public class SettingFragment extends Fragment {
         bt_appe.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
         bt_priv.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
         bt_about.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
+        bt_logout.setTextSize(TypedValue.COMPLEX_UNIT_SP,pref.getInt("size",12));
 
         // account
         bt_acc.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,31 @@ public class SettingFragment extends Fragment {
             public void onClick(View v) {
                 Intent in_about = new Intent(getActivity().getApplication(), aboutus.class);
                 startActivity(in_about);
+            }
+        });
+
+        // logout
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(false);
+        builder.setTitle("Comfirm to logout?");
+        bt_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent in_logout = new Intent(getActivity().getApplication(), LoginActivity.class);
+                        startActivity(in_logout);
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
         });
 
