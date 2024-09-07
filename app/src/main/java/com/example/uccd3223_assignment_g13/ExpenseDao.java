@@ -12,6 +12,9 @@ import java.util.List;
 @Dao
 public interface ExpenseDao {
 
+    @Query("SELECT * FROM Expense")
+    List<Expense> getAllExpenses();
+
     @Insert
     void insertExpense(Expense expense);
 
@@ -21,7 +24,6 @@ public interface ExpenseDao {
     @Query("SELECT * FROM Expense")
     List<Expense> getAll();
 
-    @Query("SELECT * FROM Expense")
-    LiveData<List<Expense>> getAllExpenses();
+
 
 }
