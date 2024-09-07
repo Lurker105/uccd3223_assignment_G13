@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/amount_input"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:hint="Enter Amount"
         android:inputType="numberDecimal"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +19,7 @@
     <EditText
         android:id="@+id/category_input"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="48dp"
         android:hint="Enter Category"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
     <EditText
         android:id="@+id/desc_input"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="96dp"
         android:hint="Description"
         app:layout_constraintEnd_toEndOf="parent"
