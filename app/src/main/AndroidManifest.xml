@@ -24,6 +24,9 @@
         </activity>
 
         <activity
+            android:name=".privacy"
+            android:exported="false" />
+        <activity
             android:name=".AddExpense"
             android:exported="false" />
         <activity

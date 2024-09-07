@@ -81,6 +81,14 @@ public class SettingFragment extends Fragment {
         });
 
         // privacy
+        bt_priv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in_priv = new Intent(getActivity().getApplication(), privacy.class);
+                startActivity(in_priv);
+            }
+        });
+
         // about us
         bt_about.setOnClickListener(new View.OnClickListener() {
             @Override
