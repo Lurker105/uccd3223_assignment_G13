@@ -1,6 +1,5 @@
 package com.example.uccd3223_assignment_g13;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -9,6 +8,7 @@ import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,8 +20,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameInput, passwordInput;
     private Button loginButton, registerButton, deleteAccountButton;
+    private CheckBox rememberMeCheckBox;
     private UserLoginInfo userLoginInfo;
-    private boolean passwordVisible = false;
+    private boolean passwordVisible = false; // Track password visibility
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +36,11 @@ public class LoginActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         deleteAccountButton = findViewById(R.id.deleteAccountButton);
 
+
         userLoginInfo = new UserLoginInfo(this);
 
         // Set initial icon for password visibility off
-        setIconSize(passwordInput, R.drawable.ic_visibility_off, 30, 30);
+        setIconSize(passwordInput, R.drawable.ic_visibility_off, 40, 30);
 
         // Toggle password visibility on touch
         passwordInput.setOnTouchListener(new View.OnTouchListener() {
@@ -49,11 +51,11 @@ public class LoginActivity extends AppCompatActivity {
                         // Toggle password visibility
                         if (passwordVisible) {
                             passwordInput.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance());
-                            setIconSize(passwordInput, R.drawable.ic_visibility_off, 30, 30); // Set visibility off icon
+                            setIconSize(passwordInput, R.drawable.ic_visibility_off, 40, 30); // Set visibility off icon
                             passwordVisible = false;
                         } else {
                             passwordInput.setTransformationMethod(android.text.method.HideReturnsTransformationMethod.getInstance());
-                            setIconSize(passwordInput, R.drawable.ic_visibility, 30, 30); // Set visibility on icon
+                            setIconSize(passwordInput, R.drawable.ic_visibility, 40, 30); // Set visibility on icon
                             passwordVisible = true;
                         }
                         return true;
@@ -86,24 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                 confirmDeleteAccount(); // Ask for confirmation before deletion
             }
         });
-    }
-
-    // Handle the login process
-    private void loginUser() {
-        String username = usernameInput.getText().toString().trim();
-        String password = passwordInput.getText().toString().trim();
-
-        if (validateInput(username, password)) {
-            if (userLoginInfo.checkLogin(username, password)) {
-                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-
-                // Proceed to the main activity after login
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            } else {
-                Toast.makeText(LoginActivity.this, "Invalid login. Please try again.", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     // Confirm if the user wants to delete their account
@@ -151,7 +135,42 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // Validate input fields (username and password)
+    private void loginUser() {
+        String username = usernameInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
+
+        if (validateInput(username, password)) {
+            if (userLoginInfo.checkLogin(username, password)) {
+                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            } else {
+                // If login fails, prompt the user to register
+                showRegisterPrompt();
+            }
+        }
+    }
+
+    // Show an AlertDialog prompting the user to register if login fails
+    private void showRegisterPrompt() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Login Failed");
+        builder.setMessage("Invalid login. Would you like to register a new account?");
+        builder.setPositiveButton("Register", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
     private boolean validateInput(String username, String password) {
         if (TextUtils.isEmpty(username)) {
             usernameInput.setError("Username cannot be empty");
@@ -172,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    // Set the size of the icon for password visibility
+    // Utility method to resize and set icons to 40dp
     private void setIconSize(EditText editText, int drawableRes, int width, int height) {
         Drawable drawable = ContextCompat.getDrawable(this, drawableRes);
         if (drawable != null) {

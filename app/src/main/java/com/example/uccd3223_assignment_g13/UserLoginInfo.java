@@ -10,6 +10,11 @@ public class UserLoginInfo extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "UserInfo.db";
     private static final String TABLE_USERS = "users";
+
+
+
+
+
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
 
@@ -19,10 +24,12 @@ public class UserLoginInfo extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create the users table without dob and phone number
-        db.execSQL("CREATE TABLE " + TABLE_USERS + " (" +
-                COLUMN_USERNAME + " TEXT PRIMARY KEY, " +
+        db.execSQL("CREATE TABLE " + TABLE_USERS + "(" +
+                COLUMN_USERNAME + " TEXT PRIMARY KEY," +
                 COLUMN_PASSWORD + " TEXT NOT NULL)");
+
+
+
     }
 
     @Override
@@ -31,40 +38,24 @@ public class UserLoginInfo extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Check if a username already exists
-    public boolean isUsernameExists(String username) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_USERS, null, COLUMN_USERNAME + "=?",
-                new String[]{username}, null, null, null);
-
-        boolean exists = (cursor != null && cursor.getCount() > 0);
-        if (cursor != null) {
-            cursor.close();
-        }
-        db.close();
-        return exists;
-    }
-
-    // Add a new user with only username and password
+    // Method to register a new user
     public boolean addUser(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        // Check if the username already exists
-        if (isUsernameExists(username)) {
-            db.close();
-            return false; // Username already exists, return false
-        }
-
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, username);
         values.put(COLUMN_PASSWORD, password);
+
+
+
+
+
 
         long result = db.insert(TABLE_USERS, null, values);
         db.close();
         return result != -1;
     }
 
-    // Check if a username and password match (login check)
+    // Method to check if a user can log in with provided username and password
     public boolean checkLogin(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USERS, null, COLUMN_USERNAME + "=? AND " + COLUMN_PASSWORD + "=?",
@@ -78,18 +69,20 @@ public class UserLoginInfo extends SQLiteOpenHelper {
         return result;
     }
 
-    // Delete a user
+    // Method to delete a user account if both username and password are correct
     public boolean deleteUser(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_USERS, null, COLUMN_USERNAME + "=? AND " + COLUMN_PASSWORD + "=?",
                 new String[]{username, password}, null, null, null);
 
         if (cursor != null && cursor.getCount() > 0) {
+            // User found, proceed with deletion
             int result = db.delete(TABLE_USERS, COLUMN_USERNAME + "=?", new String[]{username});
             cursor.close();
             db.close();
             return result > 0;
         } else {
+            // User not found or incorrect password
             if (cursor != null) cursor.close();
             db.close();
             return false;
