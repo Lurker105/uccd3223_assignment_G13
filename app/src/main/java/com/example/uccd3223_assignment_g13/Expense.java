@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "Expense")
 public class Expense {
 
     @PrimaryKey
@@ -67,8 +67,4 @@ public class Expense {
         this.date = date;
     }
 
-    @Entity(tableName = "expenses")
-    public class Expenses {
-        // Fields and methods
-    }
 }
