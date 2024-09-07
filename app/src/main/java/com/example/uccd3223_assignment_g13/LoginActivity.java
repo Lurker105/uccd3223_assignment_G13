@@ -153,6 +153,13 @@ public class LoginActivity extends AppCompatActivity {
                     String dob = cursor.getString(dobIndex);
                     String phone = cursor.getString(phoneIndex);
                     cursor.close(); // Close the cursor
+                    // Store user details in SharedPreferences
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("username", username);
+                    editor.putString("dob", dob);
+                    editor.putString("phone", phone);
+                    editor.commit();  // Commit changes
                     // Navigate to MainActivity or any other page
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
