@@ -25,6 +25,7 @@ import org.eazegraph.lib.models.ValueLineSeries;
 
 public class HomeFragment extends Fragment {
 
+    //public static String[] appendArray(int n)
     public HomeFragment(){
         // require a empty public constructor
     }
@@ -40,7 +41,7 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Spinner date_sel = (Spinner) getView().findViewById(R.id.date_selected);
-        String[] date_arr = {"a", "b", "c"};
+        String[] date_arr = {};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, date_arr);
         date_sel.setAdapter(adapter);
 
