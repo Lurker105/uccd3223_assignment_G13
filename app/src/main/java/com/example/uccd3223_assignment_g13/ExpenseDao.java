@@ -17,6 +17,4 @@ public interface ExpenseDao {
     @Query("SELECT * FROM expenses")
     List<Expense> getAllExpenses();
 
-    @Query("SELECT * FROM expenses WHERE id = :id")
-    Expense getExpenseById(int id);
 }

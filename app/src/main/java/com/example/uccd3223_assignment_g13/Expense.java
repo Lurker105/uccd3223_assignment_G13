@@ -1,5 +1,7 @@
 package com.example.uccd3223_assignment_g13;
 
+import androidx.room.Entity;
+
 public class Expense {
 
     private int id;
@@ -54,5 +56,10 @@ public class Expense {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Entity(tableName = "expenses")
+    public class Expenses {
+        // Fields and methods
     }
 }
