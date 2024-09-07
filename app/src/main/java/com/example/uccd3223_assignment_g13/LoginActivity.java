@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,29 +20,26 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameInput, passwordInput;
     private Button loginButton, registerButton, deleteAccountButton;
-    private CheckBox rememberMeCheckBox;
     private UserLoginInfo userLoginInfo;
-    private boolean passwordVisible = false; // Track password visibility
+    private boolean passwordVisible = false;
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize UI components
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
         deleteAccountButton = findViewById(R.id.deleteAccountButton);
 
-
         userLoginInfo = new UserLoginInfo(this);
 
         // Set initial icon for password visibility off
         setIconSize(passwordInput, R.drawable.ic_visibility_off, 40, 30);
 
-        // Toggle password visibility on touch
         passwordInput.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -51,11 +48,11 @@ public class LoginActivity extends AppCompatActivity {
                         // Toggle password visibility
                         if (passwordVisible) {
                             passwordInput.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance());
-                            setIconSize(passwordInput, R.drawable.ic_visibility_off, 40, 30); // Set visibility off icon
+                            setIconSize(passwordInput, R.drawable.ic_visibility_off, 40, 30);
                             passwordVisible = false;
                         } else {
                             passwordInput.setTransformationMethod(android.text.method.HideReturnsTransformationMethod.getInstance());
-                            setIconSize(passwordInput, R.drawable.ic_visibility, 40, 30); // Set visibility on icon
+                            setIconSize(passwordInput, R.drawable.ic_visibility, 40, 30);
                             passwordVisible = true;
                         }
                         return true;
@@ -65,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Handle login button click
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Handle register button click
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,16 +76,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Handle delete account button click
         deleteAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirmDeleteAccount(); // Ask for confirmation before deletion
+                confirmDeleteAccount();
             }
         });
     }
 
-    // Confirm if the user wants to delete their account
     private void confirmDeleteAccount() {
         String username = usernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
@@ -105,7 +98,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Create an AlertDialog to confirm deletion
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete Account");
         builder.setMessage("Are you sure you want to delete your account? This action cannot be undone.");
@@ -124,14 +116,16 @@ public class LoginActivity extends AppCompatActivity {
         builder.show();
     }
 
-    // Delete the account if the username and password match
     private void deleteAccount(String username, String password) {
+        Log.d(TAG, "Attempting to delete account for user: " + username);
         boolean isDeleted = userLoginInfo.deleteUser(username, password);
 
         if (isDeleted) {
             Toast.makeText(LoginActivity.this, "Account deleted successfully.", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Account deleted successfully for user: " + username);
         } else {
             Toast.makeText(LoginActivity.this, "Invalid username or password. Account not deleted.", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Account deletion failed for user: " + username);
         }
     }
 
@@ -140,18 +134,19 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordInput.getText().toString().trim();
 
         if (validateInput(username, password)) {
+            Log.d(TAG, "Validating login for user: " + username);
             if (userLoginInfo.checkLogin(username, password)) {
                 Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Login successful for user: " + username);
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             } else {
-                // If login fails, prompt the user to register
+                Log.d(TAG, "Login failed for user: " + username);
                 showRegisterPrompt();
             }
         }
     }
 
-    // Show an AlertDialog prompting the user to register if login fails
     private void showRegisterPrompt() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Login Failed");
