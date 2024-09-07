@@ -16,7 +16,7 @@ public abstract class ExpenseDatabase extends  RoomDatabase{
     private static volatile ExpenseDatabase INSTANCE;
 
     // Get the singleton instance of the database
-    public static ExpenseDatabase getDatabase(final Context context) {
+    public static ExpenseDatabase getInstance(final Context context) {
         if (INSTANCE == null) {
             synchronized (ExpenseDatabase.class) {
                 if (INSTANCE == null) {
