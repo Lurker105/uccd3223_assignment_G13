@@ -1,11 +1,13 @@
 package com.example.uccd3223_assignment_g13;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
 
+@Dao
 public interface ExpenseDao {
 
     @Insert
@@ -14,7 +16,7 @@ public interface ExpenseDao {
     @Delete
     void deleteExpense(Expense expense);
 
-    @Query("SELECT * FROM expenses")
-    List<Expense> getAllExpenses();
+    @Query("SELECT * FROM Expense")
+    List<Expense> getAll();
 
 }

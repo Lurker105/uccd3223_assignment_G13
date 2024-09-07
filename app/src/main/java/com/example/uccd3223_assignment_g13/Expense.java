@@ -1,14 +1,23 @@
 package com.example.uccd3223_assignment_g13;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity
 public class Expense {
 
+    @PrimaryKey
     private int id;
 
+    @ColumnInfo(name = "category")
     private String category;
+
+    @ColumnInfo(name = "amount")
     private double amount;
+    @ColumnInfo(name = "desc")
     private String desc;
+    @ColumnInfo(name = "date")
     private String date;
 
     public Expense(double amount, String category, String desc, String date) {
