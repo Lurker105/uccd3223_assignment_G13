@@ -86,8 +86,8 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
         return ExpenseModalArrayList;
     }
 
-    public void updateExpense(String originalExpenseCat, String amount, String category,
-                              String description, String date) {
+    public void updateExpense(String originalExpenseCat, String amount, String date,
+                              String category, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 

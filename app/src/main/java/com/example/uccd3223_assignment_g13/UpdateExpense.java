@@ -55,8 +55,8 @@ public class UpdateExpense extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ExpenseDB.updateExpense(expenseCat, AmountEdt.getText().toString(),
-                        CategoryEdt.getText().toString(), DescriptionEdt.getText().toString(),
-                        DateEdt.getText().toString());
+                        DateEdt.getText().toString(), CategoryEdt.getText().toString(),
+                        DescriptionEdt.getText().toString());
 
                 Toast.makeText(UpdateExpense.this, "Course Updated",
                         Toast.LENGTH_SHORT).show();
