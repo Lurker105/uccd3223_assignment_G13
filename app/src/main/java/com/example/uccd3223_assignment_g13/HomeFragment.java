@@ -52,12 +52,18 @@ public class HomeFragment extends Fragment {
         for(String arrItem : arr) {
             String arrItem_1 = arrItem.split("/")[0];
             String arrItem_2 = arrItem.split("/")[1];
+            if (arrItem_1.length() == 1){
+                arrItem_1 = "0" + arrItem_1;
+            }
             tempArr = appendArray(tempArr, arrItem_2 + "/" + arrItem_1);
         }
         Arrays.sort(tempArr);
         for(String arrItem : tempArr) {
             String arrItem_1 = arrItem.split("/")[0];
             String arrItem_2 = arrItem.split("/")[1];
+            if (arrItem_2.charAt(0) == '0'){
+                arrItem_2 = String.valueOf(arrItem_2.charAt(1));
+            }
             newArr = appendArray(newArr, arrItem_2 + "/" + arrItem_1);
         }
         return newArr;
