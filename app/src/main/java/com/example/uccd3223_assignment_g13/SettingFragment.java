@@ -32,7 +32,7 @@ public class SettingFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // set size
+        // set appearence
         SharedPreferences pref = getActivity().getSharedPreferences("appearance",0);
         SharedPreferences.Editor prefEd = pref.edit();
 

@@ -1,5 +1,6 @@
 package com.example.uccd3223_assignment_g13;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -77,6 +78,23 @@ public class HomeFragment extends Fragment {
         super.onStart();
         Spinner date_sel = (Spinner) getView().findViewById(R.id.date_selected);
         String[] date_arr = {};
+
+        // set appearence
+        SharedPreferences pref = getActivity().getSharedPreferences("appearance",0);
+        SharedPreferences.Editor prefEd = pref.edit();
+
+        LinearLayout ll = (LinearLayout) getView().findViewById(R.id.bgHome);
+        switch (pref.getString("color","white")){
+            case "white":
+                ll.setBackgroundColor(getResources().getColor(R.color.white));
+                break;
+            case "blue":
+                ll.setBackgroundColor(getResources().getColor(R.color.blue));
+                break;
+            case "green":
+                ll.setBackgroundColor(getResources().getColor(R.color.green));
+                break;
+        }
 
         ExpenseDatabase ExpenseDB = new ExpenseDatabase(getActivity());
         Cursor getMonth_Year = ExpenseDB.getMonth_Year();

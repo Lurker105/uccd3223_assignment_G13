@@ -1,7 +1,5 @@
 package com.example.uccd3223_assignment_g13;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -11,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class appearance extends AppCompatActivity {
 
     @Override
@@ -18,7 +18,7 @@ public class appearance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appearance);
 
-        // set size
+        // set appearence
         SharedPreferences pref = getSharedPreferences("appearance",MODE_PRIVATE);
         SharedPreferences.Editor prefEd = pref.edit();
 

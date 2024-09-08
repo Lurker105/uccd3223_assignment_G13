@@ -19,7 +19,7 @@ public class privacy extends AppCompatActivity {
         setContentView(R.layout.activity_privacy);
         userLoginInfo = new UserLoginInfo(this);
 
-        // set size
+        // set appearence
         SharedPreferences pref = getSharedPreferences("appearance",MODE_PRIVATE);
         SharedPreferences.Editor prefEd = pref.edit();
 
