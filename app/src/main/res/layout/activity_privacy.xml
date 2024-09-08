@@ -30,7 +30,6 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:visibility="visible"
                 app:icon="@drawable/baseline_arrow_back_24"
                 app:iconSize="40dp"
@@ -44,12 +43,6 @@
                 android:text="@string/privacy"
                 android:textSize="@dimen/sizeTitle" />
 
-            <TextView
-                android:id="@+id/space"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                tools:visibility="visible" />
         </LinearLayout>
 
         <TextView
