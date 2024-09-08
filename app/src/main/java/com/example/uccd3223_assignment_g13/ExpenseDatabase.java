@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 
 public class ExpenseDatabase extends SQLiteOpenHelper {
 
@@ -63,6 +65,25 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
         // at last we are closing our
         // database after adding database.
         db.close();
+    }
+
+    public ArrayList<ExpenseModal> viewExpense(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorExpense = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        ArrayList<ExpenseModal> ExpenseModalArrayList = new ArrayList<>();
+
+        if (cursorExpense.moveToFirst()){
+            do {
+                ExpenseModalArrayList.add(new ExpenseModal(cursorExpense.getString(1),
+                        cursorExpense.getString(4),cursorExpense.getString(2),
+                        cursorExpense.getString(3)));
+            } while (cursorExpense.moveToNext());
+        }
+
+        cursorExpense.close();
+        return ExpenseModalArrayList;
     }
 
     @Override

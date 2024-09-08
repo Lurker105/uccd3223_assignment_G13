@@ -37,6 +37,7 @@ public class TransactionFragment extends Fragment {
 
         LinearLayout ll = (LinearLayout) getView().findViewById(R.id.bgTran);
         Button bt_addexpense = (Button) getView().findViewById(R.id.addexpense);
+        Button bt_viewexpense = (Button) getView().findViewById(R.id.view_button);
 
         switch (pref.getString("color","white")){
             case "white":
@@ -50,6 +51,7 @@ public class TransactionFragment extends Fragment {
                 break;
         }
         bt_addexpense.setTextSize(TypedValue.COMPLEX_UNIT_SP, pref.getInt("size", 12));
+        bt_viewexpense.setTextSize(TypedValue.COMPLEX_UNIT_SP, pref.getInt("size",12));
 
         bt_addexpense.setOnClickListener(new View.OnClickListener(){
 
@@ -58,6 +60,16 @@ public class TransactionFragment extends Fragment {
                 startActivity(in_addexpense);
             }
         });
+
+        bt_viewexpense.setOnClickListener(new View.OnClickListener(){
+
+            public void onClick(View v){
+                Intent in_viewexpense = new Intent(getActivity().getApplication(), ViewExpense.class);
+                startActivity(in_viewexpense);
+            }
+        });
+
+
 
     }
 }
