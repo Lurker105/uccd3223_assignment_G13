@@ -26,6 +26,7 @@ import org.eazegraph.lib.models.PieModel;
 import org.eazegraph.lib.models.ValueLinePoint;
 import org.eazegraph.lib.models.ValueLineSeries;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -39,6 +40,24 @@ public class HomeFragment extends Fragment {
             newArr[i] = arr[i];
         }
         newArr[i] = x;
+        return newArr;
+    }
+
+    public static String[] arrSort(String arr[]){
+        String[] tempArr ={};
+        String[] newArr ={};
+
+        for(String arrItem : arr) {
+            String arrItem_1 = arrItem.split("/")[0];
+            String arrItem_2 = arrItem.split("/")[1];
+            tempArr = appendArray(tempArr, arrItem_2 + "/" + arrItem_1);
+        }
+        Arrays.sort(tempArr);
+        for(String arrItem : tempArr) {
+            String arrItem_1 = arrItem.split("/")[0];
+            String arrItem_2 = arrItem.split("/")[1];
+            newArr = appendArray(newArr, arrItem_2 + "/" + arrItem_1);
+        }
         return newArr;
     }
 
@@ -78,7 +97,7 @@ public class HomeFragment extends Fragment {
 
             }
         }
-
+        date_arr = arrSort(date_arr);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, date_arr);
         date_sel.setAdapter(adapter);
