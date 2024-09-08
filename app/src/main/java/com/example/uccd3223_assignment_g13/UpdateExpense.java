@@ -58,7 +58,7 @@ public class UpdateExpense extends AppCompatActivity {
                         DateEdt.getText().toString(), CategoryEdt.getText().toString(),
                         DescriptionEdt.getText().toString());
 
-                Toast.makeText(UpdateExpense.this, "Course Updated",
+                Toast.makeText(UpdateExpense.this, "Expense Updated",
                         Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(UpdateExpense.this, AddExpense.class);

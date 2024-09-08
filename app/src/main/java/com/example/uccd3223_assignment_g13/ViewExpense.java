@@ -34,7 +34,7 @@ public class ViewExpense extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ViewExpense.this,
                 RecyclerView.VERTICAL, false);
         expenseRV.setLayoutManager(linearLayoutManager);
-        
+
         expenseRV.setAdapter(expenseRVAdapter);
 
     }

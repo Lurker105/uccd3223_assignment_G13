@@ -77,8 +77,8 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
         if (cursorExpense.moveToFirst()){
             do {
                 ExpenseModalArrayList.add(new ExpenseModal(cursorExpense.getString(1),
-                        cursorExpense.getString(4),cursorExpense.getString(2),
-                        cursorExpense.getString(3)));
+                        cursorExpense.getString(2), cursorExpense.getString(3),
+                        cursorExpense.getString(4)));
             } while (cursorExpense.moveToNext());
         }
 
