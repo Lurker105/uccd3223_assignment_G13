@@ -30,12 +30,6 @@
         android:paddingRight="10pt"
         android:paddingBottom="10pt">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="transaction"
-            android:textSize="30dp" />
-
         <Button
             android:id="@+id/addexpense"
             android:layout_width="match_parent"

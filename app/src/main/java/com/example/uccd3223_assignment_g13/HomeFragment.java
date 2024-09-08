@@ -152,6 +152,7 @@ public class HomeFragment extends Fragment {
 
                 Cursor getMonthyCost = ExpenseDB.getMonthlyCost(date_val);
                 LinearLayout piechart_bar = (LinearLayout) getView().findViewById(R.id.piechart_bar);
+                piechart_bar.removeAllViews();
 
                 int count = 1;
                 String color_val;
