@@ -1,6 +1,7 @@
 package com.example.uccd3223_assignment_g13;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,20 @@ public class ExpenseRVAdapter extends RecyclerView.Adapter<ExpenseRVAdapter.View
         holder.expenseCategory.setText(modal.getCategory());
         holder.expenseDescription.setText(modal.getDescription());
         holder.expenseDate.setText(modal.getDate());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, UpdateExpense.class);
+
+                i.putExtra("amount", modal.getAmount());
+                i.putExtra("category",modal.getCategory());
+                i.putExtra("description",modal.getDescription());
+                i.putExtra("date",modal.getDate());
+
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

@@ -86,6 +86,20 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
         return ExpenseModalArrayList;
     }
 
+    public void updateExpense(String originalExpenseCat, String amount, String category,
+                              String description, String date) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(AMOUNT_COL, amount);
+        values.put(CATEGORY_COL, category);
+        values.put(DESCRIPTION_COL, description);
+        values.put(DATE_COL, date);
+
+        db.update(TABLE_NAME, values, "category=?", new String[]{originalExpenseCat});
+        db.close();
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // this method is called to check if the table exists already.
